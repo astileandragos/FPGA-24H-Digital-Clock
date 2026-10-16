@@ -1,37 +1,31 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.numeric_std.ALL;
 
 entity clk_1hz is
-Generic ( COUNT_LIMIT : INTEGER := 99999999);
-  Port (
-  clk : in std_logic ;
-  clk1 : out std_logic 
-   );
+    Port (
+        clk   : in  STD_LOGIC;
+        reset : in  STD_LOGIC;
+        ce    : out STD_LOGIC
+    );
 end clk_1hz;
 
 architecture Behavioral of clk_1hz is
-
-signal temp1: std_logic := '0';
-signal counter1: INTEGER RANGE 0 TO COUNT_LIMIT := 0;
-
+    constant COUNT_LIMIT : integer := 99999999;
+    signal counter : integer range 0 to COUNT_LIMIT := 0;
 begin
-
-process(clk)
-begin
-    if rising_edge(clk) then
-        counter1 <= counter1 + 1;
-        temp1 <= '0';
-        if (counter1 = COUNT_LIMIT) then
-            temp1 <= '1';
-            counter1 <= 0;
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if reset = '1' then
+                counter <= 0;
+                ce <= '0';
+            elsif counter = COUNT_LIMIT then
+                counter <= 0;
+                ce <= '1';
+            else
+                counter <= counter + 1;
+                ce <= '0';
+            end if;
         end if;
-    end if;
-end process;
-
-
-
-
-clk1 <= temp1;
-
+    end process;
 end Behavioral;

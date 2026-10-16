@@ -11,7 +11,7 @@ A complete 24-hour digital clock hardware implementation on the Digilent Nexys 4
 - **Hardware:** Digilent Nexys 4 (Artix-7)
 - **Tools:** Xilinx Vivado
 
-## ⚙️ Hardware Architecture
+## Hardware Architecture
 The system is highly modular, separating the clock dividers, the main counter logic, and the 7-segment display drivers.
 
 ### RTL Schematic
